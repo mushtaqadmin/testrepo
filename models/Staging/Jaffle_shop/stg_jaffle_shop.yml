@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: stg_customers
+    description: Raw customers data.
+    columns: 
+      - name: customer_id
+        description: Primary key for customers.
+        
+        tests:
+          - unique
+          - not_null
+
+  - name: stg_orders
+    columns:
+      - name: order_id
+        description: One Unique Order per row
+        tests:
+          - unique
+          - not_null
+      - name: status
+        tests:
+          - accepted_values:
+              values:
+                - completed
+                - shipped
+                - returned
+                - return_pending
+                - placed
